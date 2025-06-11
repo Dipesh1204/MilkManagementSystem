@@ -1,0 +1,70 @@
+package com.example.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.model.MonthlySales;
+import com.example.services.MilkRateService;
+import com.example.services.MonthlySalesServiceImplement;
+
+@RestController
+@RequestMapping("/api/monthly-sales")
+public class MonthlySalesController {
+@Autowired
+public MonthlySalesServiceImplement monthlySalesServiceImplement;
+
+@Autowired
+private MilkRateService milkRateService; // Make sure it's correctly injected
+
+
+//@PostMapping
+//public MonthlySales addMonthlySales(MonthlySales monthlySales) {
+//    double rate = milkRateService.getCurrentRate(); // You implement this
+//    monthlySales.setTotalAmount(monthlySales.getTotalMilk() * rate);
+//    return monthlySalesServiceImplement.addMonthlySales(monthlySales);
+//
+//}
+
+@PostMapping
+public MonthlySales addMonthlySales(@RequestBody MonthlySales monthlySales) {
+    if (monthlySales.getTotalMilk() == null) {
+        throw new IllegalArgumentException("Total Milk is required");
+    }
+
+    double rate = milkRateService.getCurrentRate();
+    monthlySales.setTotalAmount(monthlySales.getTotalMilk() * rate);
+    return monthlySalesServiceImplement.addMonthlySales(monthlySales);
+}
+
+
+@GetMapping
+public List<MonthlySales> getAllSales() {
+    return monthlySalesServiceImplement.getAllSales();
+}
+
+@GetMapping("/customer/{customerId}")
+public List<MonthlySales> getSalesByCustomer(@PathVariable Long customerId) {
+    return monthlySalesServiceImplement.getSalesByCustomer(customerId);
+}
+
+@GetMapping("/{id}")
+public ResponseEntity<MonthlySales> getSalesById(@PathVariable Long id) {
+    return monthlySalesServiceImplement.getSalesById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+}
+
+@PutMapping("/{id}")
+public ResponseEntity<MonthlySales> updateMonthlySales(@PathVariable Long id, @RequestBody MonthlySales updatedSales) {
+    return ResponseEntity.ok(monthlySalesServiceImplement.updateMonthlySales(id, updatedSales));
+}
+
+@DeleteMapping("/{id}")
+public ResponseEntity<Void> deleteProvider(@PathVariable Long id) {
+	monthlySalesServiceImplement.deleteSales(id);
+    return ResponseEntity.noContent().build();
+}
+}

@@ -1,0 +1,16 @@
+INDEX VERSION 1.134+D:\Milk.java\.metadata\.plugins\org.eclipse.jdt.core
+3494339947.index
+2563812811.index
+1859306060.index
+4293997914.index
+660421767.index
+1865797976.index
+2374114680.index
+2240550193.index
+723823735.index
+3541239288.index
+2322853572.index
+3413270776.index
+4132606596.index
+4128121618.index
+2127485444.index

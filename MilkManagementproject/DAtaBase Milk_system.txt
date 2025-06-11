@@ -1,0 +1,51 @@
+milk_system
+
+CREATE DATABASE Milk_Management;
+USE Milk_Management;
+
+-- Customers Table
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address TEXT,
+    phone VARCHAR(15) UNIQUE,
+    email VARCHAR(100) UNIQUE
+);
+
+-- Milk Consumption Table (Tracks daily milk usage for each customer)
+CREATE TABLE milk_records (
+    record_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    record_date DATE NOT NULL,
+    quantity DECIMAL(5,2) NOT NULL, -- Liters of milk consumed
+    rate DECIMAL(5,2) NOT NULL, -- Price per liter
+    total_amount DECIMAL(10,2) GENERATED ALWAYS AS (quantity * rate) STORED, 
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);
+
+CREATE TABLE milk_rate (
+    rate_id INT AUTO_INCREMENT PRIMARY KEY,
+    rate DECIMAL(5,2) NOT NULL DEFAULT 54.00,
+    effective_from DATE NOT NULL DEFAULT CURDATE()
+);
+
+
+-- Milk Providers Table
+CREATE TABLE milk_providers (
+    provider_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) UNIQUE,
+    address TEXT,
+    email VARCHAR(100) UNIQUE
+);
+
+-- Monthly Sales Table
+CREATE TABLE monthly_sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    month_year VARCHAR(7) NOT NULL, -- Format: YYYY-MM (e.g., "2025-01")
+    total_milk DECIMAL(10,2) NOT NULL, -- Total milk supplied in a month
+    total_amount DECIMAL(10,2) NOT NULL, -- Total amount for the month
+    payment_status ENUM('Paid', 'Pending') DEFAULT 'Pending',
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);

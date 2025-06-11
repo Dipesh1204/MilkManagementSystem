@@ -1,0 +1,79 @@
+package com.example.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "monthly_sales")
+public class MonthlySales {
+    @Id
+    private Long saleId; // No @GeneratedValue
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    private String monthYear;
+    private Double totalMilk;
+    private Double totalAmount;
+    private String status;
+
+    public MonthlySales() {
+    }
+
+    public MonthlySales(Long saleId, Customer customer, String monthYear, Double totalMilk, Double totalAmount, String status) {
+        this.saleId = saleId;
+        this.customer = customer;
+        this.monthYear = monthYear;
+        this.totalMilk = totalMilk;
+        this.totalAmount = totalAmount;
+        this.status = status;
+    }
+
+    public Long getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(Long saleId) {
+        this.saleId = saleId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getMonthYear() {
+        return monthYear;
+    }
+
+    public void setMonthYear(String monthYear) {
+        this.monthYear = monthYear;
+    }
+
+    public Double getTotalMilk() {
+        return totalMilk;
+    }
+
+    public void setTotalMilk(Double totalMilk) {
+        this.totalMilk = totalMilk;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount = totalMilk*54;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

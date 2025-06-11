@@ -1,0 +1,50 @@
+package com.example.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import com.example.model.MilkRate;
+import com.example.repository.MilkRateRepository;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+@Service
+@Transactional
+
+public abstract class MilkRateServiceImplement implements MilkRateService {
+@Autowired
+public MilkRateRepository milkRate;
+
+@Override
+public List<MilkRate> getAllRates() {
+    return milkRate.findAll();
+}
+
+@Override
+public Optional<MilkRate> getRateById(Long rateid) { // Ensure this method is implemented
+    return milkRate.findById(rateid);
+}
+
+@Override
+public MilkRate addMilkRate(MilkRate Rate) {
+    return milkRate.save(Rate);
+}
+
+@Override
+public MilkRate updateMilkRate(Long id, MilkRate updatedRate) {
+    return milkRate.findById(id).map(rate -> {
+        rate.setRate(updatedRate.getRate());
+        return milkRate.save(rate);
+    }).orElseThrow(() -> new RuntimeException("Milk rate not found"));
+}
+
+
+@Override
+public void deleteMilkRate(Long RateId) {
+	 milkRate.deleteById(RateId);
+}
+}
+

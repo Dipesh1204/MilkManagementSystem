@@ -1,0 +1,38 @@
+BACKEND
+MilkManagementSystem/
+│── src/
+│   ├── main/
+│   │   ├── java/com/example/
+│   │   │   ├── controller/          # Controllers (REST APIs)
+│   │   │   │   ├── CustomerController.java
+│   │   │   │   ├── MilkProviderController.java
+│   │   │   │   ├── MilkRateController.java
+│   │   │   │   ├── MilkRecordController.java
+│   │   │   │   ├── MonthlySalesController.java
+│   │   │   ├── model/               # Entity Models (Database Tables)
+│   │   │   │   ├── Customer.java
+│   │   │   │   ├── MilkProvider.java
+│   │   │   │   ├── MilkRate.java
+│   │   │   │   ├── MilkRecord.java
+│   │   │   │   ├── MonthlySales.java
+│   │   │   ├── repository/           # Spring Data JPA Repositories
+│   │   │   │   ├── CustomerRepository.java
+│   │   │   │   ├── MilkProviderRepository.java
+│   │   │   │   ├── MilkRateRepository.java
+│   │   │   │   ├── MilkRecordRepository.java
+│   │   │   │   ├── MonthlySalesRepository.java
+│   │   │   ├── services/             # Service Layer (Business Logic)
+│   │   │   │   ├── CustomerService.java
+│   │   │   │   ├── CustomerServiceImplement.java
+│   │   │   │   ├── MilkProviderService.java
+│   │   │   │   ├── MilkProviderServiceImplement.java
+│   │   │   │   ├── MilkRateService.java
+│   │   │   │   ├── MilkRateServiceImplement.java
+│   │   │   │   ├── MilkRecordService.java
+│   │   │   │   ├── MilkRecordServiceImplement.java
+│   │   │   │   ├── MonthlySalesService.java
+│   │   │   │   ├── MonthlySalesServiceImplement.java
+│   │   ├── resources/
+│   │   │   ├── application.properties  # Configuration file for DB connection
+│── pom.xml                # Dependencies (Spring Boot, MySQL, etc.)
+--------------------------------------------------------------------------

@@ -1,0 +1,53 @@
+package com.example.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "milk_rates")
+
+public class MilkRate {
+    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long rateId;
+
+    private Double rate;
+    private String effectiveFrom;
+    
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    
+    public MilkRate() {
+    	
+    }
+    
+	public MilkRate(Long rateId, Double rate, String effectiveFrom) {
+		super();
+		this.rateId = rateId;
+		this.rate = rate;
+		this.effectiveFrom = effectiveFrom;
+	}
+	public Long getRateId() {
+		return rateId;
+	}
+	public void setRateId(Long rateId) {
+		this.rateId = rateId;
+	}
+	public Double getRate() {
+		return rate;
+	}
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+	public String getEffectiveFrom() {
+		return effectiveFrom;
+	}
+	public void setEffectiveFrom(String effectiveFrom) {
+		this.effectiveFrom = effectiveFrom;
+	}
+    
+}
+
+
+

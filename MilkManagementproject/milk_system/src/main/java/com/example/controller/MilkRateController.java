@@ -1,0 +1,54 @@
+package com.example.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.model.MilkRate;
+import com.example.services.MilkRateServiceImplement;
+
+@RestController
+@RequestMapping("/api/milk-rates")
+public class MilkRateController {
+	@Autowired
+	public MilkRateServiceImplement milkRateServiceImplement;
+	
+	 @GetMapping
+	    public List<MilkRate> getAllRates() {
+	        return milkRateServiceImplement.getAllRates();
+	    }
+
+	  @GetMapping("/{id}")
+	    public ResponseEntity<MilkRate> getRateById(@PathVariable Long id) {
+	        return milkRateServiceImplement.getRateById(id)
+	                .map(ResponseEntity::ok)
+	                .orElse(ResponseEntity.notFound().build());
+	    }
+
+	    @PostMapping
+	    public MilkRate addMilkRate(@RequestBody MilkRate milkRate) {
+	        return milkRateServiceImplement.addMilkRate(milkRate);
+	    }
+
+	    @PutMapping("/{id}")
+	    public ResponseEntity<MilkRate> updateMilkRate(@PathVariable Long id, @RequestBody MilkRate updatedRate) {
+	        return ResponseEntity.ok(milkRateServiceImplement.updateMilkRate(id, updatedRate));
+	    }
+	    
+	    @DeleteMapping("/{id}")
+	    public ResponseEntity<Void> deleteMilkRate(@PathVariable Long id) {
+	    	milkRateServiceImplement.deleteMilkRate(id);
+	        return ResponseEntity.noContent().build();
+	    }
+	    
+	    @GetMapping("/latest")
+	    public ResponseEntity<MilkRate> getLatestRate() {
+	        MilkRate latest = milkRateServiceImplement.getLatestRate();
+	        return ResponseEntity.ok(latest);
+	    }
+
+
+
+}

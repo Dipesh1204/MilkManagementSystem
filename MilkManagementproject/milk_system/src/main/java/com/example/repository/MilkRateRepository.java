@@ -1,0 +1,27 @@
+package com.example.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Pageable;
+
+import com.example.model.MilkRate;
+
+@Repository
+public interface MilkRateRepository extends JpaRepository<MilkRate, Long> {
+
+    @Query("SELECT m FROM MilkRate m ORDER BY m.effectiveFrom DESC")
+    List<MilkRate> findLatestRate(Pageable pageable);
+
+    @Query(value = "SELECT IFNULL(MAX(rate_id), 0) + 1 FROM milk_rates", nativeQuery = true)
+    Long getnextRateid();  
+    
+    Optional<MilkRate> findTopByOrderByEffectiveFromDesc();
+
+    Optional<MilkRate> findTopByCustomer_CustomerIdOrderByEffectiveFromDesc(Long customerId);
+
+}

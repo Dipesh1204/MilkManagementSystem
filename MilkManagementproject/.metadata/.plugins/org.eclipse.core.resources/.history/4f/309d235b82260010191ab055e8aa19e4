@@ -1,0 +1,81 @@
+package com.example.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.model.Customer;
+import com.example.model.MonthlySales;
+import com.example.repository.CustomerRepository;
+import com.example.repository.MonthlySalesRepository;
+
+@Service
+@Transactional
+public class MonthlySalesServiceImplement implements MonthlySalesService {
+    
+    @Autowired
+    private MonthlySalesRepository monthlySalesRepository; 
+    
+    @Autowired
+    private CustomerRepository customerRepository; // Injected CustomerRepository
+
+    @Override
+    public List<MonthlySales> getAllSales() {
+        return monthlySalesRepository.findAll();
+    }
+
+    @Override
+    public List<MonthlySales> getSalesByCustomer(Long customerId) {
+        return monthlySalesRepository.findByCustomer_CustomerId(customerId);
+    }
+    @Override
+    public Optional<MonthlySales> getSalesById(Long saleId) {
+        return monthlySalesRepository.findById(saleId);
+    }
+
+    @Override
+    public MonthlySales addMonthlySales(MonthlySales sales) {
+        if (sales.getCustomer() == null || sales.getCustomer().getCustomerId() == null) {
+            throw new RuntimeException("Customer information is missing in the request.");
+        }
+
+        Customer existingCustomer = customerRepository.findById(sales.getCustomer().getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        sales.setCustomer(existingCustomer);
+        if (sales.getSaleId() == null) {                      // Assign ID only for new records
+            sales.setSaleId(monthlySalesRepository.getNextSaleId());
+        }
+
+        return monthlySalesRepository.save(sales);
+    
+    }
+
+    @Override
+    public MonthlySales updateMonthlySales(Long saleId, MonthlySales updatedSales) {
+        return monthlySalesRepository.findById(saleId).map(sales -> {
+            sales.setMonthYear(updatedSales.getMonthYear());
+            sales.setTotalMilk(updatedSales.getTotalMilk());
+            sales.setTotalAmount(updatedSales.getTotalAmount());
+            sales.setStatus(updatedSales.getStatus());
+
+            if (updatedSales.getCustomer() != null && updatedSales.getCustomer().getCustomerId() != null) {
+                Customer existingCustomer = customerRepository.findById(updatedSales.getCustomer().getCustomerId())
+                    .orElseThrow(() -> new RuntimeException("Customer not found"));
+                sales.setCustomer(existingCustomer);
+            }
+
+            return monthlySalesRepository.save(sales);
+        }).orElseThrow(() -> new RuntimeException("Monthly sales record not found!"));
+    }
+
+
+ 
+    @Override
+    public void deleteSales(Long saleId) {
+    	monthlySalesRepository.deleteById(saleId);
+    }
+}

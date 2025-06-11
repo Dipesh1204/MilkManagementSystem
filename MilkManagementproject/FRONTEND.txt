@@ -1,0 +1,36 @@
+FRONTEND
+
+milk-management-frontend/
+│── public/                  # Static files
+│   ├── index.html           # Main HTML file
+│── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── Button.js
+│   │   ├── Table.js
+│   ├── pages/               # Page components
+│   │   ├── Customers.js
+│   │   ├── MilkProviders.js
+│   │   ├── MilkRates.js
+│   │   ├── MilkRecords.js
+│   │   ├── MonthlySales.js
+│   │   ├── Dashboard.js
+│   ├── services/            # API calls with Axios
+│   │   ├── customerService.js
+│   │   ├── milkProviderService.js
+│   │   ├── milkRateService.js
+│   │   ├── milkRecordService.js
+│   │   ├── monthlySalesService.js
+│   ├── routes.js            # React Router setup
+│   ├── App.js               # Main React component
+│   ├── index.js             # Entry point
+│   ├── styles.css           # Global styles (Bootstrap-based)
+│── package.json             # Dependencies & scripts
+│── README.md                # Project documentation
+  
+
+
+
+
+

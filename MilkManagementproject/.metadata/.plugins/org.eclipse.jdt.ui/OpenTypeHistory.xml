@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.services{MilkRecordservice.java[MilkRecordservice" modifiers="513" timestamp="1740934573774"/>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.services{MilkProviderService.java[MilkProviderService" modifiers="513" timestamp="1739272911512"/>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.repository{MilkProviderRepository.java[MilkProviderRepository" modifiers="513" timestamp="1739272912309"/>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.repository{MilkRateRepository.java[MilkRateRepository" modifiers="513" timestamp="1746114779472"/>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.services{MilkRateService.java[MilkRateService" modifiers="513" timestamp="1746101755811"/>
+    <typeInfo handle="=milk_system/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.services{MonthlySalesService.java[MonthlySalesService" modifiers="513" timestamp="1746614200137"/>
+</typeInfoHistroy>

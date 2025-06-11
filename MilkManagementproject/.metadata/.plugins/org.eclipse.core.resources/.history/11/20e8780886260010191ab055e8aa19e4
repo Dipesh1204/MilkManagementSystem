@@ -1,0 +1,23 @@
+package com.example.services;
+
+import com.example.model.MilkRate;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface MilkRateService {
+    List<MilkRate> getAllRates();
+    
+    Optional<MilkRate> getRateById(Long rateId);
+    
+    MilkRate addMilkRate(MilkRate rate);
+    
+    MilkRate updateMilkRate(Long id, MilkRate updatedRate);
+    
+    void deleteMilkRate(Long rateId);
+    
+    public double getCurrentRate();
+   
+
+}
+
